@@ -1,37 +1,83 @@
-import { useState } from 'react';
-import { AiOutlineDelete } from 'react-icons/ai';
-import { AiOutlineEdit } from 'react-icons/ai';
+import React, { useState } from 'react';
+import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
+import { newContact } from '../App';
+
 interface ContactCardProps {
   id: number;
   name: string;
   phoneNumber: number | string;
   emailAddress: string;
   handleDelete: (id: number) => Promise<void>;
+  setNewContact: React.Dispatch<React.SetStateAction<newContact>>;
+  newContact: newContact;
+  updateContact: (id: number, data: { phoneNumber: string; emailAddress: string }) => Promise<void>;
 }
 
-export function ContactCard(props: ContactCardProps){
+export function ContactCard(props: ContactCardProps) {
+  // State
   const [isShown, setIsShown] = useState(false);
-  
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedPhoneNumber, setEditedPhoneNumber] = useState(String(props.phoneNumber));
+  const [editedEmail, setEditedEmail] = useState(props.emailAddress);
+
+  // Handlers
+  const handleEditSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await props.updateContact(props.id, {
+        phoneNumber: editedPhoneNumber,
+        emailAddress: editedEmail,
+      });
+
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Error updating contact.", error);
+    }
+  };
+
   return (
     <ul>
-      <li 
-        onClick={()=>setIsShown(prevIsShown=>!prevIsShown)}
-        className="contact-card-name"
-        >
-          {`${props.name}`}
+      <li onClick={() => setIsShown((prevIsShown) => !prevIsShown)} className="contact-card-name">
+        {isEditing ? (
+          <>
+            <label htmlFor="">Phone</label>
+            <input
+              type="text"
+              value={editedPhoneNumber}
+              onChange={(e) => setEditedPhoneNumber(e.target.value)}
+            />
+            <label htmlFor="">Email</label>
+            <input
+              type="text"
+              value={editedEmail}
+              onChange={(e) => setEditedEmail(e.target.value)}
+            />
+            <button onClick={handleEditSubmit}>Submit</button>
+          </>
+        ) : (
+          `${props.name}`
+        )}
       </li>
-      {isShown && 
+
+      {isShown && !isEditing && (
         <>
-          <li className='contact-card-phoneNumber'>{props.phoneNumber}
+          <li id='phone-info' className='contact-card-phoneNumber'>
+            {props.phoneNumber}
           </li>
-          <li className='contact-card-emailAddress'>{props.emailAddress}</li>
+          <li id='email-info' className='contact-card-emailAddress'>
+            {props.emailAddress}
+          </li>
         </>
-      }
-      <AiOutlineDelete 
-      className={'contact-card-delete-icon'}
-      onClick={props.handleDelete}
+      )}
+
+      <AiOutlineDelete
+        className={'contact-card-delete-icon'}
+        onClick={() => props.handleDelete(props.id)}
       />
-      <AiOutlineEdit className={'contact-card-edit-icon'}/>
+      <AiOutlineEdit
+        onClick={() => setIsEditing((prev) => !prev)}
+        className={'contact-card-edit-icon'}
+      />
     </ul>
-  )
+  );
 }
