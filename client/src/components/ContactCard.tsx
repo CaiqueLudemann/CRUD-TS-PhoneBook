@@ -37,9 +37,10 @@ export function ContactCard(props: ContactCardProps) {
 
   return (
     <ul>
-      <li onClick={() => setIsShown((prevIsShown) => !prevIsShown)} className="contact-card-name">
+      <li onClick={() => setIsShown((prevIsShown) => !prevIsShown)} className="contact-card">
         {isEditing ? (
           <>
+            <aside className='contact-card-name' onClick={()=>setIsEditing(false)}>{props.name}</aside>
             <label htmlFor="">Phone</label>
             <input
               type="text"
@@ -52,20 +53,21 @@ export function ContactCard(props: ContactCardProps) {
               value={editedEmail}
               onChange={(e) => setEditedEmail(e.target.value)}
             />
-            <button onClick={handleEditSubmit}>Submit</button>
+            <button className='submit-button' onClick={handleEditSubmit}>Submit</button>
+            <button className='cancel-button' onClick={()=>setIsEditing(false)}>Cancel</button>
           </>
         ) : (
-          `${props.name}`
+          <aside className='contact-card-name'>{props.name}</aside>
         )}
       </li>
 
       {isShown && !isEditing && (
         <>
           <li id='phone-info' className='contact-card-phoneNumber'>
-            {props.phoneNumber}
+            Phone: {props.phoneNumber}
           </li>
           <li id='email-info' className='contact-card-emailAddress'>
-            {props.emailAddress}
+            Email: {props.emailAddress}
           </li>
         </>
       )}

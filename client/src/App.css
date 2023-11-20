@@ -14,7 +14,7 @@ body {
 
 .search-grid {
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr; 
+  grid-template-columns: 1fr 4fr 1fr;
   row-gap: 30px;
   align-items: center;
   padding: 10px;
@@ -25,7 +25,7 @@ body {
 .contacts-header {
   font-size: 32px;
   color: #333;
-  grid-column: 1; 
+  grid-column: 1;
 }
 
 .add-contact-button {
@@ -35,11 +35,11 @@ body {
   padding: 10px 20px;
   font-size: 14px;
   cursor: pointer;
-  grid-column: 3; 
+  grid-column: 3;
 }
 
 .search-field {
-  grid-column: 1/4; 
+  grid-column: 1/4;
   margin-left: 10px;
   padding: 8px;
   font-size: 14px;
@@ -56,13 +56,42 @@ ul {
   padding: 15px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.contact-card { 
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
 .contact-card-name {
   cursor: pointer;
-  font-size: 26px;
-  font-weight: bold;
-  color: #333;
+  
+}
+
+.contact-card > label {
+  font-size: 18px;
+}
+
+.submit-button {
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+  border-radius: 20px;
+  border: 1px solid black;
+}
+
+.cancel-button {
+  position: absolute;
+  left: 100px;
+  bottom: 0;
+  border-radius: 20px;
+  border: 1px solid black;
 }
 
 .contact-card-phoneNumber,
@@ -70,11 +99,25 @@ ul {
   color: #555;
 }
 
-.contact-card-delete-icon,
-.contact-card-edit-icon {
-  margin-left: 10px;
+.contact-card-delete-icon {
   cursor: pointer;
-  color: #ff5733; 
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 18px;
+}
+
+
+.contact-card-edit-icon {
+  cursor: pointer;
+  position: absolute;
+  right: 40px;
+  top: 0;
+  font-size: 18px;
+}
+
+.contact-card-delete-icon {
+  color: #ff5733;
 }
 
 .contact-card-edit-icon {
