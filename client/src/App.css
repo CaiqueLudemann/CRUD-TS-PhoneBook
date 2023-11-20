@@ -1,0 +1,84 @@
+/* App.css */
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+.app-tittle {
+  text-align: center;
+  font-size: 36px;
+  color: #333;
+  margin: 20px 0;
+}
+
+.search-grid {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr; /* Three columns: left, middle, right */
+  row-gap: 30px;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contacts-header {
+  font-size: 32px;
+  color: #333;
+  grid-column: 1; /* Left column */
+}
+
+.add-contact-button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  grid-column: 3; /* Right column */
+}
+
+.search-field {
+  grid-column: 1/4; /* Middle column */
+  margin-left: 10px;
+  padding: 8px;
+  font-size: 14px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-card-form {
+  background-color: #fff;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card-name {
+  cursor: pointer;
+  font-size: 26px;
+  font-weight: bold;
+  color: #333;
+}
+
+.contact-card-phoneNumber,
+.contact-card-emailAddress {
+  color: #555;
+}
+
+.contact-card-delete-icon,
+.contact-card-edit-icon {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #ff5733; /* Delete icon color */
+}
+
+.contact-card-edit-icon {
+  color: #3498db; /* Edit icon color */
+}
