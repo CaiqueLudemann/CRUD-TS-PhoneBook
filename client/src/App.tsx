@@ -144,11 +144,11 @@ function App() {
             onSubmit={(e)=>handleSubmit(e, newContact)} 
             className='addContactForm'>
               <label>Name</label>
-              <input className='contact-form-name' name='name' type="text" value={newContact.name} onChange={(e)=>handleNewContactInputChange(e)}/>
+              <input required className='contact-form-name' name='name' type="text" value={newContact.name} onChange={(e)=>handleNewContactInputChange(e)}/>
               <label>Phone</label>
-              <input className='contact-form-phoneNumber' name='phoneNumber' type="text" value={newContact.phoneNumber} onChange={(e)=>handleNewContactInputChange(e)}/>
+              <input required className='contact-form-phoneNumber' name='phoneNumber' type="number" value={newContact.phoneNumber} onChange={(e)=>handleNewContactInputChange(e)}/>
               <label>Email</label>
-              <input className='contact-form-emailAddress' name='emailAddress' type="text" value={newContact.emailAddress} onChange={(e)=>handleNewContactInputChange(e)}/>
+              <input required className='contact-form-emailAddress' name='emailAddress' type="email" value={newContact.emailAddress} onChange={(e)=>handleNewContactInputChange(e)}/>
               <button className='contact-form-submitButton' type="submit">Submit</button>
               <button onClick={()=>setIsAddingContact(false)}>Cancel</button>
           </form>
