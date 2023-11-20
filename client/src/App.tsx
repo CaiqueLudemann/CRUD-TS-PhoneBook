@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import './App.css'
 import { ContactCard } from './components/ContactCard';
 
@@ -17,7 +17,8 @@ function App() {
   const BASE_URL = `http://localhost:3005/api`;
 
   //requests
-  async function getContacts(): Promise<void> {
+  const getContacts = useCallback(async ()=>{
+    {
     try {
       const response = await fetch(`${BASE_URL}/people`, {
       method: "GET",
@@ -34,6 +35,7 @@ function App() {
       console.error(error);
     }
   }
+  }, []) 
 
   async function deleteContact(id:number) {
       try {
@@ -48,7 +50,7 @@ function App() {
 
   useEffect(() =>{
     getContacts();
-  }, []);
+  }, [getContacts]);
 
   const filteredContacts = contacts.filter(
     (contact) =>
@@ -59,9 +61,15 @@ function App() {
 
   //event handlers
   async function handleDelete(id: number){
-    await deleteContact(id)
+    try {
+      await deleteContact(id)
+      await getContacts();
+    } catch(error) {
+      console.log("Error handling delete.", error)
+    }
+    
   }
-
+console.log('I rendered')
 
   return (
     <>
