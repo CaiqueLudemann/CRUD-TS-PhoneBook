@@ -5,14 +5,27 @@ import { ContactCard } from './components/ContactCard';
 type Contact = {
     id: number;
     name: string;
-    phoneNumber: number;
+    phoneNumber: number|string;
     emailAddress: string;
   };
+
+type newContact = {
+  id: number|null;
+  name: string;
+  phoneNumber: string | number | readonly string[] | undefined;
+  emailAddress: string;
+}
 
 function App() {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [name, setName] = useState('');
-  // const [isAddingContact, setIsAddingContact] = useState(false);
+  const [isAddingContact, setIsAddingContact] = useState(false);
+  const [newContact, setNewContact] = useState<newContact>({
+    id: null,
+    name: '',
+    phoneNumber: undefined,
+    emailAddress: ''
+  })
 
   const BASE_URL = `http://localhost:3005/api`;
 
@@ -48,9 +61,18 @@ function App() {
       }
   }
 
+  async function createContact(newContact:newContact) {
+    await fetch(`${BASE_URL}/people`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(newContact)
+    });
+  }
+
   useEffect(() =>{
     getContacts();
   }, [getContacts]);
+
 
   const filteredContacts = contacts.filter(
     (contact) =>
@@ -69,14 +91,68 @@ function App() {
     }
     
   }
-console.log('I rendered')
+
+  function handleNewContactInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+  setNewContact((prevNewContact) => ({
+    ...prevNewContact,
+    [e.target.name]: e.target.value
+  }));
+}
+
+  async function handleSubmit(
+  e: React.FormEvent<HTMLFormElement>,
+  { name, phoneNumber, emailAddress }: newContact
+) {
+  e.preventDefault();
+
+  const createdContact = {
+    id: Date.now(),
+    name,
+    phoneNumber,
+    emailAddress,
+  };
+
+  await createContact(createdContact);
+
+  setContacts((prevContacts) => [
+    ...prevContacts,
+    createdContact as Contact, 
+  ]);
+
+  setNewContact({
+    id: null,
+    name: '',
+    phoneNumber: undefined,
+    emailAddress: '',
+  });
+
+  setIsAddingContact(false);
+}
+
 
   return (
     <>
       <h1 className='app-title  '>Phone Book App</h1>
       <div className='search-grid'>
         <span className='contacts-header'>Contacts</span>
-        <button className='add-contact-button'>+ Add Contact</button>
+        <button 
+        className='add-contact-button'
+        onClick={()=>setIsAddingContact(true)}
+        >+ Add Contact</button>
+        {isAddingContact && 
+          <form 
+            onSubmit={(e)=>handleSubmit(e, newContact)} 
+            className='addContactForm'>
+              <label>Name</label>
+              <input className='contact-form-name' name='name' type="text" value={newContact.name} onChange={(e)=>handleNewContactInputChange(e)}/>
+              <label>Phone</label>
+              <input className='contact-form-phoneNumber' name='phoneNumber' type="text" value={newContact.phoneNumber} onChange={(e)=>handleNewContactInputChange(e)}/>
+              <label>Email</label>
+              <input className='contact-form-emailAddress' name='emailAddress' type="text" value={newContact.emailAddress} onChange={(e)=>handleNewContactInputChange(e)}/>
+              <button className='contact-form-submitButton' type="submit">Submit</button>
+              <button onClick={()=>setIsAddingContact(false)}>Cancel</button>
+          </form>
+        }
         <input 
           typeof='text'
           value={name} 

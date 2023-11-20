@@ -4,7 +4,7 @@ import { AiOutlineEdit } from 'react-icons/ai';
 interface ContactCardProps {
   id: number;
   name: string;
-  phoneNumber: number;
+  phoneNumber: number | string;
   emailAddress: string;
   handleDelete: (id: number) => Promise<void>;
 }

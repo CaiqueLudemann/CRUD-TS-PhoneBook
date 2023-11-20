@@ -44,6 +44,13 @@ const app = express();
     res.json(sortedContacts);
   });
 
+  app.post('/api/people', (req, res)=>{
+    contacts.push(req.body);
+    // contacts = sortContacts(contacts);
+    // console.log(contacts)
+    res.status(204).json({message: "New contact added."})
+  })
+
   app.delete('/api/people/:id', (req, res)=>{
     const id = Number(req.params.id);
     const contactsLength = contacts.length;
