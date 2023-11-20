@@ -16,17 +16,38 @@ function App() {
 
   const BASE_URL = `http://localhost:3005/api`;
 
-  async function getPeople(): Promise<void> {
-    const response = await fetch(`${BASE_URL}/people`, {
+  //requests
+  async function getContacts(): Promise<void> {
+    try {
+      const response = await fetch(`${BASE_URL}/people`, {
       method: "GET",
       headers: {"Content-Type": "application/json"}
     });
+
+    if (!response.ok) {
+      throw new Error(`Error fetching contacts: ${response.status}`)
+    }
+    
     const data = (await response.json() as Contact[]);
     setContacts(data);
+    } catch(error){
+      console.error(error);
+    }
+  }
+
+  async function deleteContact(id:number) {
+      try {
+        await fetch(`${BASE_URL}/people/${id}`,{
+        method: "DELETE",
+        headers: {"Content-Type": "application/json"}
+    })
+      } catch(error) {
+        console.log("Error deleting contact. ", error);
+      }
   }
 
   useEffect(() =>{
-    getPeople();
+    getContacts();
   }, []);
 
   const filteredContacts = contacts.filter(
@@ -35,6 +56,11 @@ function App() {
       (contact.name.split(/\s+/)[1] &&
         contact.name.split(/\s+/)[1].toLowerCase().startsWith(name.toLowerCase()))
   );
+
+  //event handlers
+  async function handleDelete(id: number){
+    await deleteContact(id)
+  }
 
 
   return (
@@ -54,6 +80,8 @@ function App() {
       {filteredContacts.map(contact => (
           <form className="contact-card-form" key={contact.id}>
             <ContactCard
+              id={contact.id}
+              handleDelete={()=>handleDelete(contact.id)}
               name={contact.name}
               phoneNumber={contact.phoneNumber}
               emailAddress={contact.emailAddress}

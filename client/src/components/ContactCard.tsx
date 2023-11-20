@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { AiOutlineEdit } from 'react-icons/ai';
 interface ContactCardProps {
+  id: number;
   name: string;
   phoneNumber: number;
   emailAddress: string;
+  handleDelete: (id: number) => Promise<void>;
 }
 
 export function ContactCard(props: ContactCardProps){
@@ -25,7 +27,10 @@ export function ContactCard(props: ContactCardProps){
           <li className='contact-card-emailAddress'>{props.emailAddress}</li>
         </>
       }
-      <AiOutlineDelete className={'contact-card-delete-icon'}/>
+      <AiOutlineDelete 
+      className={'contact-card-delete-icon'}
+      onClick={props.handleDelete}
+      />
       <AiOutlineEdit className={'contact-card-edit-icon'}/>
     </ul>
   )
