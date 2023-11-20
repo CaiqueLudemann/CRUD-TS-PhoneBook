@@ -14,11 +14,11 @@ type Contact = {
 };
 
 let contacts: Contact[] = [
-  { id: 1, name: "Caique Fortlage", phoneNumber: 983413847, emailAddress: "caiquefortlage@gmail.com" },
+  { id: 1, name: "John Shmoe", phoneNumber: 983413847, emailAddress: "john@gmail.com" },
   { id: 2, name: "Sophia Ludemann", phoneNumber: 8943617846, emailAddress: "sophia@gmail.com" },
-  { id: 3, name: "Rebeca Ludemann", phoneNumber: 389264875, emailAddress: "beca@hotmail.com" },
-  { id: 4, name: "Gustavo Aragao", phoneNumber: 2398333294, emailAddress: "guzinho@gmail.com" },
-  { id: 5, name: "A Bobrinha", phoneNumber: 98127348, emailAddress: "abobora@gmail.com" },
+  { id: 3, name: "Jack Black", phoneNumber: 389264875, emailAddress: "blackjack@hotmail.com" },
+  { id: 4, name: "Nick Tesla", phoneNumber: 2398333294, emailAddress: "lilnick@gmail.com" },
+  { id: 5, name: "Bob Musk", phoneNumber: 98127348, emailAddress: "musk@yahoo.com" },
 ];
 
 function sortContacts(contacts: Contact[]) {
