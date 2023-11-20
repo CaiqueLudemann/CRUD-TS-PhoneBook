@@ -3,19 +3,15 @@ import './App.css'
 import { ContactCard } from './components/ContactCard';
 
 type Contact = {
-    id: number,
-    firstName: string,
-    lastName: string,
-    phoneNumber: number,
-    emailAddress: string
+    id: number;
+    name: string;
+    phoneNumber: number;
+    emailAddress: string;
   };
 
 function App() {
-
   const [contacts, setContacts] = useState<Contact[]>([]);
-
-  const [firstName, setFirstName] = useState('');
-
+  const [name, setName] = useState('');
   // const [isAddingContact, setIsAddingContact] = useState(false);
 
   const BASE_URL = `http://localhost:3005/api`;
@@ -33,42 +29,40 @@ function App() {
     getPeople();
   }, []);
 
+  const filteredContacts = contacts.filter(
+    (contact) =>
+      contact.name.toLowerCase().startsWith(name.toLowerCase()) ||
+      (contact.name.split(/\s+/)[1] &&
+        contact.name.split(/\s+/)[1].toLowerCase().startsWith(name.toLowerCase()))
+  );
+
 
   return (
     <>
-
-      <h1 className='app-tittle'>Phone Book App</h1>
+      <h1 className='app-title  '>Phone Book App</h1>
       <div className='search-grid'>
         <span className='contacts-header'>Contacts</span>
         <button className='add-contact-button'>+ Add Contact</button>
-        <input value={firstName} onChange={(e)=>setFirstName(e.target.value)} className='search-field' type="text" placeholder='Search for contact by first name...' />
+        <input 
+          typeof='text'
+          value={name} 
+          onChange={(e)=>setName(e.target.value)} className='search-field' type="text" placeholder='Search for contact by name...' 
+        />
       </div>
-      
-      <ul>
-        {!firstName ? contacts.map(contact=>{
-         return <form className='contact-card-form' key={contact.id}>
-              <ContactCard 
-                firstName={contact.firstName} 
-                lastName={contact.lastName} 
-                phoneNumber={contact.phoneNumber}
-                emailAddress={contact.emailAddress}
-                />
-            </form>
-        }) : contacts.map(contact=>{
-          return contact.firstName === firstName &&
-            <form className='contact-card-form' key={contact.id}>
-              <ContactCard 
-                firstName={contact.firstName} 
-                lastName={contact.lastName} 
-                phoneNumber={contact.phoneNumber}
-                emailAddress={contact.emailAddress}
-                />
-            </form>
-        })}
-      </ul>
 
+      <ul>
+      {filteredContacts.map(contact => (
+          <form className="contact-card-form" key={contact.id}>
+            <ContactCard
+              name={contact.name}
+              phoneNumber={contact.phoneNumber}
+              emailAddress={contact.emailAddress}
+            />
+          </form>
+        ))}
+    </ul>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
