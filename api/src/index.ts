@@ -46,7 +46,7 @@ const app = express();
 
   app.post('/api/people', (req, res)=>{
     contacts.push(req.body);
-    // contacts = sortContacts(contacts);
+    contacts = sortContacts(contacts);
     // console.log(contacts)
     res.status(204).json({message: "New contact added."})
   })
@@ -68,4 +68,4 @@ const app = express();
 
 
 
-  app.listen(3005, () => console.log(`Running on http://localhost:3005`));
+  app.listen(3006, () => console.log(`Running on http://localhost:3006`));

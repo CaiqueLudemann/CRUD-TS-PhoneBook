@@ -27,7 +27,7 @@ function App() {
     emailAddress: ''
   })
 
-  const BASE_URL = `http://localhost:3005/api`;
+  const BASE_URL = `http://localhost:3006/api`;
 
   //requests
   const getContacts = useCallback(async ()=>{
