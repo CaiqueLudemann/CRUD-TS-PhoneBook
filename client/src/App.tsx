@@ -162,7 +162,7 @@ function App() {
               required
               className="contact-form-phoneNumber"
               name="phoneNumber"
-              type="number"
+              type="tel"
               value={newContact.phoneNumber}
               onChange={(e) => handleNewContactInputChange(e)}
             />
