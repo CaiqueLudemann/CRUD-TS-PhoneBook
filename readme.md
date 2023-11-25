@@ -24,12 +24,20 @@ This is a simple Phone Book App built with React on the frontend and Express on 
   
   cd client
   npm install
+  cd ..
+  cd api
+  npm install
 
 3. Run the development server:
 
-  npm run dev
+  * in the api directory, run:
+    - npm start
+  * in the client directory, run:
+    - npm run dev
 
-4. Open your browser and visit http://localhost:3000.
+  Attention: if the order of these commands are not followed, the app will not work as expected.
+
+4. Open your browser and visit http://localhost:5173.
 
 
 ## Project Structure

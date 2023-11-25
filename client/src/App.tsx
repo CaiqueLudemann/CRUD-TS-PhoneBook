@@ -29,7 +29,7 @@ function App() {
   });
 
   // Constants
-  const BASE_URL = `http://localhost:3006/api`;
+  const BASE_URL = `http://localhost:3007/api`;
 
   // Requests
   const getContacts = useCallback(async () => {
