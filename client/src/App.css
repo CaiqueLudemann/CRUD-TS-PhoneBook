@@ -71,32 +71,13 @@ ul {
 
 .contact-card-name {
   cursor: pointer;
-  
 }
 
 .contact-card > label {
-  font-size: 18px;
-}
-
-.submit-button {
-  position: absolute;
-  left: 20px;
-  bottom: 0;
-  border-radius: 20px;
-  border: 1px solid black;
-}
-
-.cancel-button {
-  position: absolute;
-  left: 100px;
-  bottom: 0;
-  border-radius: 20px;
-  border: 1px solid black;
-}
-
-.contact-card-phoneNumber,
-.contact-card-emailAddress {
-  color: #555;
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+  color: black;
 }
 
 .contact-card-delete-icon {
@@ -122,4 +103,25 @@ ul {
 
 .contact-card-edit-icon {
   color: #3498db;
+}
+
+.contactButtonsContainer {
+  display: flex;
+  width: fit-content;
+}
+
+
+button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 10px 10px 0 0;
+}
+
+.addContactForm {
+  display: flex;
+  flex-direction: column;
 }

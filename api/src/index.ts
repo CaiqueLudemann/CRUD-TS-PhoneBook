@@ -71,4 +71,4 @@ app.put('/api/people/:id', (req, res) => {
 });
 
 // Server
-app.listen(3006, () => console.log(`Running on http://localhost:3006`));
+app.listen(3007, () => console.log(`Running on http://localhost:3007`));

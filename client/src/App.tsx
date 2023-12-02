@@ -29,7 +29,7 @@ function App() {
   });
 
   // Constants
-  const BASE_URL = `http://localhost:3006/api`;
+  const BASE_URL = `http://localhost:3007/api`;
 
   // Requests
   const getContacts = useCallback(async () => {
@@ -175,10 +175,13 @@ function App() {
               value={newContact.emailAddress}
               onChange={(e) => handleNewContactInputChange(e)}
             />
-            <button className="contact-form-submitButton" type="submit">
+            <div className="contactButtonsContainer">
+              <button className="contact-form-submitButton" type="submit">
               Submit
-            </button>
-            <button onClick={() => setIsAddingContact(false)}>Cancel</button>
+              </button>
+              <button onClick={() => setIsAddingContact(false)}>Cancel</button>
+            </div>
+            
           </form>
         )}
         <input
