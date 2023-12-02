@@ -43,7 +43,7 @@ export function ContactCard(props: ContactCardProps) {
             <aside className='contact-card-name' onClick={()=>setIsEditing(false)}>{props.name}</aside>
             <label htmlFor="">Phone</label>
             <input
-              type="text"
+              type="tel"
               value={editedPhoneNumber}
               onChange={(e) => setEditedPhoneNumber(e.target.value)}
             />
@@ -53,8 +53,10 @@ export function ContactCard(props: ContactCardProps) {
               value={editedEmail}
               onChange={(e) => setEditedEmail(e.target.value)}
             />
-            <button className='submit-button' onClick={handleEditSubmit}>Submit</button>
-            <button className='cancel-button' onClick={()=>setIsEditing(false)}>Cancel</button>
+            <div className="contactButtonsContainer">
+              <button className='submit-button' onClick={handleEditSubmit}>Submit</button>
+              <button className='cancel-button' onClick={()=>setIsEditing(false)}>Cancel</button>
+            </div>
           </>
         ) : (
           <aside className='contact-card-name'>{props.name}</aside>
