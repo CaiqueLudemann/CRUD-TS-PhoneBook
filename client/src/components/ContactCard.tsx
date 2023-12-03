@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import { newContact } from '../App';
 
+
 interface ContactCardProps {
   id: number;
   name: string;
@@ -30,6 +31,7 @@ export function ContactCard(props: ContactCardProps) {
       });
 
       setIsEditing(false);
+
     } catch (error) {
       console.error("Error updating contact.", error);
     }

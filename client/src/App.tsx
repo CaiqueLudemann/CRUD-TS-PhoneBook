@@ -81,6 +81,25 @@ function App() {
         contact.name.split(/\s+/)[1].toLowerCase().startsWith(name.toLowerCase()))
   );
 
+  //Sorted Contacts
+  function sortContacts(contacts: Contact[]) {
+  return contacts.sort((a, b) => {
+    const firstNameA = a.name.split(/\s+/)[0];
+    const lastNameA = a.name.split(/\s+/)[1];
+
+    const firstNameB = b.name.split(/\s+/)[0];
+    const lastNameB = b.name.split(/\s+/)[1];
+
+    const firstNameComparison = firstNameA.localeCompare(firstNameB);
+
+    if (firstNameComparison === 0) {
+      return lastNameA.localeCompare(lastNameB);
+    }
+
+    return firstNameComparison;
+  });
+}
+
   // Event Handlers
   async function handleDelete(id: number) {
     try {
@@ -113,7 +132,15 @@ function App() {
 
     await createContact(createdContact);
 
+
     setContacts((prevContacts) => [...prevContacts, createdContact as Contact]);
+    
+
+    const sortedContactsArray = sortContacts(contacts);
+  setContacts([...sortedContactsArray]);
+
+    await getContacts();
+    
 
     setNewContact({
       id: null,
@@ -123,6 +150,8 @@ function App() {
     });
 
     setIsAddingContact(false);
+
+    
   }
 
   async function updateContact(id: number, data: { phoneNumber: string; emailAddress: string }) {
