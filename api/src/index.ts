@@ -47,7 +47,6 @@ app.get('/api/people', (req, res) => {
 
 app.post('/api/people', (req, res) => {
   contacts.push(req.body);
-  contacts = sortContacts(contacts);
   res.status(204).json({ message: "New contact added." });
 });
 
