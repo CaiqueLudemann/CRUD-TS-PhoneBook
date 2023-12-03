@@ -44,11 +44,12 @@ export function ContactCard(props: ContactCardProps) {
             <label htmlFor="">Phone</label>
             <input
               type="text"
-              value={editedPhoneNumber}
+              value={editedPhoneNumber === 'undefined' ? '': editedPhoneNumber}
               onChange={(e) => setEditedPhoneNumber(e.target.value)}
             />
             <label htmlFor="">Email</label>
             <input
+              required
               type="text"
               value={editedEmail}
               onChange={(e) => setEditedEmail(e.target.value)}
