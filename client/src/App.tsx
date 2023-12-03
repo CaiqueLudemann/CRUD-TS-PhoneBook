@@ -159,7 +159,6 @@ function App() {
             />
             <label>Phone</label>
             <input
-              required
               className="contact-form-phoneNumber"
               name="phoneNumber"
               type="tel"
